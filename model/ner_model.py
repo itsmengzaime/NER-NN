@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 from model import Model
-from utils import Progbar
+from utils import Progress
 from data_utils import minibatches, pad_sequences, get_chunks
 
 class NERModel(Model):
@@ -140,7 +140,7 @@ class NERModel(Model):
     def run_epoch(self, train, dev, epoch):
         batch_size = self.config.batch_size
         num_batch = (len(train) + batch_size -1) // batch_size
-        prog = Progbar(target=num_batch)
+        prog = Progress(target=num_batch)
         
         for i, (word, label) in enumerate(minibatches(train, batch_size)):
             fd , _ = self.feed_dict(word, label, self.config.lr_rate, self.config.drop_out)
