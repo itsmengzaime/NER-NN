@@ -5,24 +5,122 @@ UNK = "$UNK$"
 NUM = "$NUM$"
 NONE = "0"
 
-class MyIOError(Exception):
+class MIOError(Exception):
     def __init__(self, filename):
         message = "IOError: Unable to locate file{}".format(filename)
-        super(MyIOError, self).__init__(message)
+        super(MIOError, self).__init__(message)
         
-class PreprocessData(object):
+class PreProcessData(object):
     def __init__(self, filename, processing_word=None, processing_tag=None, m_iteration=None):
         self.filename = filename
         self.processing_word = processing_word
         self.processing_tag = processing_tag
         self.m_iteration = m_iteration
         self.length = None
+    
+    def __iter__(self):
+        num_iter = 0
         
+        with open(self.filename) as f:
+            word = []
+            tag = []
+            for line in f:
+                line = line.strip()
+                if (len(line) == 0 or line.startswith("-DOCSTART-")):
+                    if len(word) != 0:
+                        num_iter +=1
+                        if self.m_iteration is not None and num_iter > self.m_iteration:
+                            break
+                        yield word, tag 
+                        word, tag = [], []
+                else:
+                    ls = line.split(' ')
+                    w, t = ls[0], ls[-1]
+                    if self.processing_word is not None:
+                        w = self.processing_word(w)
+                    if self.processing_tag is not None:
+                        t = self.processing_tag(t)
+                    word += [w]
+                    tag += [t]
+    
+    def __len__(self):
+        if self.length is None:
+            self.length = 0
+            for  _ in self:
+                self.length += 1
+        
+        return self.length
+    
+    def processing_vocab(data):
+        print("Building Vocabulary...")
+        w_vocab = set()
+        t_vocab = set()
+        for d in data:
+            for word, tag in data:
+                w_vocab.update(word)
+                t_vocab.update(tag)
+        print("- done. {} tokens".format(len(w_vocab)))
+        return w_vocab, t_vocab
+    
+    def processing_char_vocab(data):
+        c_vocab = set()
+        for word, _ in data:
+            c_vocab.update(word)
+        return c_vocab
+    
+    def glove_vocab(filename):
+        print("Buidling Glove Vocabulary ...")
+        glove_vocab = set()
+        with open(filename) as f:
+            for line in f:
+                word = line.strip().split(' ')[0]
+                glove_vocab.add(word)
+        print(" -done. {} tokens".format(len(glove_vocab)))
+        
+    def writing_vocab(vocab, filename):
+        print("Writing output file...")
+        with open(filename,"w") as f:
+            for i, word in enumerate(vocab):
+                if i != len(vocab) -1:
+                    f.write("{}\n".format(word))
+                else:
+                    f.write(word)
+        print(" - done. {} tokens". format(len(vocab)))
+    
+    def load_dict(filename):
+        try:
+            d = dict()
+            with open(filename) as f:
+                for idx, word in enumerate(f):
+                    word = word.strip()
+                    d[word] = idx
+        except IOError:
+            raise MIOError(filename)
+        return d
+    
+    def exp_trimmed_glove_vector(vocab, glove_filename, trimmed_filename, dim):
+        embeddings = np.zeros([len(vocab), dim])
+        with open(glove_filename) as f:
+            for line in f:
+                line = line.strip().split(' ')
+                word = line[0]
+                embeddings = [float(x) for x in line[1:]]
+                if word in vocab:
+                    w_idx = vocab[word]
+                    embeddings[w_idx] = np.asarray(embeddings)
+        np.savez_compressed(trimmed_filename, embeddings=embeddings)
+    
+    def processing_trimmed_glove_vector(filename):
+        try:
+            with np.load(filename) as data:
+                return data["embeddings"]
+        except IOError:
+            raise MIOError(filename)
+            
     
     def _pad_sequences(sequences, pad_tok, max_length):
         sequence_padded = []
         sequence_length = []
-        
         for seq in sequences:
             seq = list(seq)
             seq_ = seq[:max_length] + pad_tok*max(max_length, len(seq),0)
