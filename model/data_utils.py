@@ -117,13 +117,40 @@ class PreProcessData(object):
         except IOError:
             raise MIOError(filename)
             
+    def get_processing_word(vocab_words=None, vocab_chars=None, 
+                            lowercase=False, chars=False, allow_unk=True):
+        def f(word):
+            if vocab_words is not None and chars == True:
+                c_id =[]
+                for char in word:
+                    if char in vocab_chars:
+                        c_id += [vocab_chars[char]]
+            if lowercase:
+                word.lower()
+            if word.digit():
+                word = NUM
+            
+            if vocab_words is not None:
+                if word in vocab_words:
+                    word = vocab_words[word]
+                else:
+                    if allow_unk:
+                        word = vocab_words[UNK]
+                    else:
+                        raise Exception("UnKnown Key. Please re-check the tag")
+            
+            if vocab_chars is not None and chars == True:
+                return c_id, word
+            else:
+                return word
+        return f
     
     def _pad_sequences(sequences, pad_tok, max_length):
         sequence_padded = []
         sequence_length = []
         for seq in sequences:
             seq = list(seq)
-            seq_ = seq[:max_length] + pad_tok*max(max_length, len(seq),0)
+            seq_ = seq[:max_length] + [pad_tok]*max(max_length - len(seq),0)
             sequence_padded += [seq_]
             sequence_length += [min(len(seq), max_length)]
             return sequence_padded, sequence_length
@@ -132,8 +159,7 @@ class PreProcessData(object):
             max_length = max(map(lambda x: len(x), sequences))
             sequence_padded, sequence_length = _pad_sequences(sequences, pad_tok, max_length)
         elif nlevels == 2 :
-            max_length_word = max([max(map(lambda x: len(x), seq)) 
-                              for seq in sequences])
+            max_length_word = max([max(map(lambda x: len(x), seq)) for seq in sequences])
             sequence_padded = []
             sequence_length = []
             for seq in sequences:
@@ -145,4 +171,52 @@ class PreProcessData(object):
             
             sequence_padded, _ = _pad_sequences(sequence_padded, [pad_tok]*max_length_word, max_length_sentence)
             sequence_length, _ = _pad_sequences(sequence_length, 0 , max_length_sentence)
+        
+        return sequence_padded, sequence_length
+    def minibatches(data, size):
+        b_x, b_y = [],[]
+        for (x,y) in data:
+            if len(b_x) == size:
+                yield b_x, b_y
+                b_x, b_y = [],[]
             
+            if type(x[0]) == tuple:
+                x = zip(*x)
+            b_x += [x]
+            b_y += [y]
+            
+        if len(b_x) != 0:
+            yield b_x, b_y
+    
+    def get_chunk_type(token,tag):
+        tag_name = tag[token]
+        tag_class = tag_name.split('-')[0]
+        tag_type = tag_name.split('-')[1]
+        return tag_class, tag_type
+    
+    def get_chunks(seq, tags):
+        default = tags[NONE]
+        tag_id = {idx: tag for tag, idx in tags.items()}
+        chunk_list = []
+        chunk_type, chunk_start = None,None
+        for i, token in enumerate(seq):
+            if token == default and chunk_type is not None:
+                chunk = (chunk_type, chunk_start, i)
+                chunk_list.append(chunk)
+                chunk_type, chunk_start = None, None
+            elif token != default:
+                token_chunk_class, token_chunk_type = get_chunk_type(token, tag_id)
+                if chunk_type is None:
+                    chunk_type, chunk_start = token_chunk_type, i
+                elif token_chunk_type != chunk_type or token_chunk_class == "B"
+                    chunk = (chunk_type, chunk_start, i)
+                    chunk_list.append(chunk)
+                    chunk_type, chunk_start = token_chunk_type, i
+            else:
+                pass
+        
+        if chunk_type is not None:
+            chunk = (chunk_type, chunk_start, len(seq))
+            chunk_list.append(chunk)
+        return chunk_list
+    
