@@ -9,7 +9,7 @@ from data_utils import minibatches, pad_sequences, get_chunks
 class NERModel(Model):
     def __init__(self, config):
         super(NERModel, self).__init__(config)
-        self.tag_idx = {idx: tag for tag, idx in self.config.vocab_list.items()}
+        self.tag_idx = {idx: tag for tag, idx in self.config.vocab_tag.items()}
         
     def initialize_placeholder_tensor(self):
         self.c_id = tf.placeholder(tf.int32, shape=[None, None, None], name="char_id") # [batch_size, max_length_sentence, max_length_word]				
@@ -90,12 +90,12 @@ class NERModel(Model):
             output = tf.nn.dropout(output, self.drop_out)
             
         with tf.variable_scope("projection"):
-            W = tf.get_variable("W", dtype=tf.float32, shape=[2*self.config.hidden_size_lstm, self.config.n_tag])
-            b= tf.get_variable("b", dtype=tf.float32,  shape=[self.config.n_tag], initializer=tf.zeros_initializer())
+            W = tf.get_variable("W", dtype=tf.float32, shape=[2*self.config.hidden_size_lstm, self.config.num_tag])
+            b= tf.get_variable("b", dtype=tf.float32,  shape=[self.config.num_tag], initializer=tf.zeros_initializer())
             num_step = tf.shape(output)[1]
             output = tf.reshape(output, shape=[-1,2*self.config.hidden_size_lstm])
             pred = tf.matmul(output, W) + b
-            self.logit = tf.reshape(pred, [-1, num_step, self.config.n_tag])
+            self.logit = tf.reshape(pred, [-1, num_step, self.config.num_tag])
             
     def prediction_option(self):
         if not self.config.use_crf:
@@ -168,8 +168,8 @@ class NERModel(Model):
             lb = lb[:length]
             lb_pred = lb_pred[:length]
             accuracy += [a==b for (a,b) in zip(lb, lb_pred)]
-            lb_chunks = set(get_chunks(lb, self.config.vocab_list))
-            lb_pred_chunks = set(get_chunks(lb_pred, self.config.vocab_list))
+            lb_chunks = set(get_chunks(lb, self.config.vocab_tag))
+            lb_pred_chunks = set(get_chunks(lb_pred, self.config.vocab_tag))
             correct_prediction += len(lb_chunks & lb_pred_chunks)
             total_prediction += len(lb_pred_chunks)
             total_correct += len(lb_chunks)

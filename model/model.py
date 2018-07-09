@@ -1,5 +1,5 @@
-import tensorflow as tf
-import os
+# import tensorflow as tf
+# import os
 
 class Model(object):
     def __init__(self, config):
@@ -56,7 +56,7 @@ class Model(object):
     
     def add_summary(self):
         self.merged = tf.summary.merge_all()
-        self.file_writer = tf.summary.FileWriter(self.config,dir_output, self.session.graph)
+        self.file_writer = tf.summary.FileWriter(self.config.dir_output, self.session.graph)
         
     def train(self,train, dev):
         record = 0

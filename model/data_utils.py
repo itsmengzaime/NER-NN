@@ -208,7 +208,7 @@ class PreProcessData(object):
                 token_chunk_class, token_chunk_type = get_chunk_type(token, tag_id)
                 if chunk_type is None:
                     chunk_type, chunk_start = token_chunk_type, i
-                elif token_chunk_type != chunk_type or token_chunk_class == "B"
+                elif token_chunk_type != chunk_type or token_chunk_class == "B":
                     chunk = (chunk_type, chunk_start, i)
                     chunk_list.append(chunk)
                     chunk_type, chunk_start = token_chunk_type, i
