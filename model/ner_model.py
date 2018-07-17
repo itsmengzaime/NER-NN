@@ -9,12 +9,12 @@ from data_utils import minibatches, pad_sequences, get_chunks
 class NERModel(Model):
     def __init__(self, config):
         super(NERModel, self).__init__(config)
-        self.tag_idx = {idx: tag for tag, idx in self.config.vocab_tag.items()}
+        self.tag_idx = {idx: tag for tag, idx in self.config.vocab_tags.items()}
         
     def initialize_placeholder_tensor(self):
         self.c_id = tf.placeholder(tf.int32, shape=[None, None, None], name="char_id") # [batch_size, max_length_sentence, max_length_word]				
         self.w_id = tf.placeholder(tf.int32, shape=[None, None], name="word_id") #[batch_size, max_length_of_sentence_in_batch]
-        self.w_len = tf.placeholder(tf.int32, shapnge=[None, None], name="word_len")  # [batch_size, max_length_sentence]
+        self.w_len = tf.placeholder(tf.int32, shape=[None, None], name="word_len")  # [batch_size, max_length_sentence]
         self.seq_len = tf.placeholder(tf.int32, shape=[None], name="sequence_length") #[batch_size]
         self.label = tf.placeholder(tf.int32, shape=[None, None], name="label") # [batch size, max_length_of_sentence_in_batch]
         self.drop_out = tf.placeholder(tf.float32, shape=[], name="drop_out")
@@ -50,16 +50,16 @@ class NERModel(Model):
         with tf.variable_scope("words"):
             if self.config.embbedings is None:
                 self.log.info("WARNING: randomly initializing word vectors")
-                _word_embbeding = tf.get_variable(name="_word_embbeding",dtype=tf.float32,shape=[self.config.num_word, self.config.dim_word])
+                _word_embbedings = tf.get_variable(name="_word_embbedings",dtype=tf.float32,shape=[self.config.num_word, self.config.dim_word])
             else:
-                _word_embbeding = tf.Variable(self.config.embbedings, name="_word_embbeding", dtype=tf.float32, trainable=self.config.train_embbedings)
+                _word_embbedings = tf.Variable(self.config.embbedings, name="_word_embbedings", dtype=tf.float32, trainable=self.config.train_embbedings)
                 
-            word_embbedings = tf.nn.embedding_lookup(_word_embbeding, self.w_id, name="word_embbeding")
+            word_embbedings = tf.nn.embedding_lookup(_word_embbedings, self.w_id, name="word_embbedings")
         
         with tf.variable_scope("chars"):
             if self.config.use_chars:
-                _char_embbeding = tf.get_variable(name="_char_embbeding", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])
-                char_embbedings = tf.nn.embedding_lookup(_char_embbedings, self.c_id, name="char_embbeding")
+                _char_embbedings = tf.get_variable(name="_char_embbedings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])
+                char_embbedings = tf.nn.embedding_lookup(_char_embbedings, self.c_id, name="char_embbedings")
                 s = tf.shape(char_embbedings)
 
                 char_embbedings = tf.reshape(char_embbedings, shape=[s[0]*s[1],s[-2], self.config.dim_char])
@@ -75,9 +75,9 @@ class NERModel(Model):
                 output = tf.concat([output_fw, output_bw], axis=-1)
                 
                 output = tf.reshape(output, shape=[s[0],s[1],2*self.config.hidden_size_char])
-                word_embbeding = tf.concat([word_embbeding,output], axis=-1)
+                word_embbedings = tf.concat([word_embbedings,output], axis=-1)
                 
-        self.word_embbeding = tf.nn.dropout(word_embbeding, self.drop_out)
+        self.word_embbeding = tf.nn.dropout(word_embbedings, self.drop_out)
     
     def logits_option(self):
         with tf.variable_scope("bi-lstm"):

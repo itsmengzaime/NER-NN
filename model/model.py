@@ -1,5 +1,5 @@
-# import tensorflow as tf
-# import os
+import tensorflow as tf
+import os
 
 class Model(object):
     def __init__(self, config):
