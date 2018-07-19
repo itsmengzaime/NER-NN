@@ -1,1 +1,258 @@
 2018-07-12 16:30:35,501:INFO: Initialize tf session
+2018-07-17 12:46:29,299:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 12:46:29,299:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 12:46:31,452:INFO: Initialize tf session
+2018-07-17 12:46:31,452:INFO: Initialize tf session
+2018-07-17 12:48:37,122:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 12:48:39,107:INFO: Initialize tf session
+2018-07-17 12:49:35,638:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 12:49:37,612:INFO: Initialize tf session
+2018-07-17 12:50:57,363:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 12:50:59,408:INFO: Initialize tf session
+2018-07-17 13:15:14,613:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:15:16,684:INFO: Initialize tf session
+2018-07-17 13:18:02,203:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:18:04,052:INFO: Initialize tf session
+2018-07-17 13:19:03,483:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:19:05,511:INFO: Initialize tf session
+2018-07-17 13:20:01,547:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:20:03,436:INFO: Initialize tf session
+2018-07-17 13:20:16,381:INFO: Epoch 1 out of 10
+2018-07-17 13:24:41,902:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:24:43,671:INFO: Initialize tf session
+2018-07-17 13:24:44,533:INFO: Epoch 1 out of 10
+2018-07-17 13:26:49,887:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:26:51,689:INFO: Initialize tf session
+2018-07-17 13:26:52,391:INFO: Epoch 1 out of 10
+2018-07-17 13:30:25,361:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:30:27,208:INFO: Initialize tf session
+2018-07-17 13:30:28,034:INFO: Epoch 1 out of 10
+2018-07-17 13:33:24,082:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:33:26,442:INFO: Initialize tf session
+2018-07-17 13:33:27,292:INFO: Epoch 1 out of 10
+2018-07-17 13:36:27,946:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:36:29,737:INFO: Initialize tf session
+2018-07-17 13:36:30,455:INFO: Epoch 1 out of 10
+2018-07-17 13:39:15,377:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:39:17,201:INFO: Initialize tf session
+2018-07-17 13:39:18,008:INFO: Epoch 1 out of 10
+2018-07-17 13:55:23,605:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 13:55:25,403:INFO: Initialize tf session
+2018-07-17 13:55:26,145:INFO: Epoch 1 out of 10
+2018-07-17 14:06:39,338:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:06:41,163:INFO: Initialize tf session
+2018-07-17 14:06:41,875:INFO: Epoch 1 out of 10
+2018-07-17 14:10:40,373:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:10:42,216:INFO: Initialize tf session
+2018-07-17 14:10:42,948:INFO: Epoch 1 out of 10
+2018-07-17 14:11:13,512:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:11:15,373:INFO: Initialize tf session
+2018-07-17 14:11:16,113:INFO: Epoch 1 out of 10
+2018-07-17 14:11:23,769:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:12:33,433:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:12:35,217:INFO: Initialize tf session
+2018-07-17 14:12:35,921:INFO: Epoch 1 out of 10
+2018-07-17 14:12:43,463:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:12:43,761:INFO: New best score recorded...
+2018-07-17 14:12:43,762:INFO: Epoch 2 out of 10
+2018-07-17 14:12:50,357:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:12:50,583:INFO: New best score recorded...
+2018-07-17 14:12:50,583:INFO: Epoch 3 out of 10
+2018-07-17 14:12:57,170:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:12:57,388:INFO: New best score recorded...
+2018-07-17 14:12:57,389:INFO: Epoch 4 out of 10
+2018-07-17 14:13:04,083:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:13:04,347:INFO: New best score recorded...
+2018-07-17 14:13:04,348:INFO: Epoch 5 out of 10
+2018-07-17 14:13:10,934:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:13:11,338:INFO: New best score recorded...
+2018-07-17 14:13:11,338:INFO: Epoch 6 out of 10
+2018-07-17 14:13:17,922:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:13:18,237:INFO: New best score recorded...
+2018-07-17 14:13:18,238:INFO: Epoch 7 out of 10
+2018-07-17 14:13:24,868:INFO: accuracy 95.24 - f1 0.00
+2018-07-17 14:13:25,094:INFO: New best score recorded...
+2018-07-17 14:13:25,094:INFO: Epoch 8 out of 10
+2018-07-17 14:13:31,678:INFO: accuracy 95.24 - f1 66.67
+2018-07-17 14:13:31,900:INFO: New best score recorded...
+2018-07-17 14:13:31,900:INFO: Epoch 9 out of 10
+2018-07-17 14:13:38,480:INFO: accuracy 95.24 - f1 66.67
+2018-07-17 14:13:38,757:INFO: New best score recorded...
+2018-07-17 14:13:38,757:INFO: Epoch 10 out of 10
+2018-07-17 14:13:45,347:INFO: accuracy 100.00 - f1 100.00
+2018-07-17 14:13:45,598:INFO: New best score recorded...
+2018-07-17 14:25:14,711:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:25:16,498:INFO: Initialize tf session
+2018-07-17 14:25:17,222:INFO: Epoch 1 out of 10
+2018-07-17 14:25:24,802:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:25:25,143:INFO: New best score recorded...
+2018-07-17 14:25:25,143:INFO: Epoch 2 out of 10
+2018-07-17 14:25:31,798:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:25:32,174:INFO: New best score recorded...
+2018-07-17 14:25:32,175:INFO: Epoch 3 out of 10
+2018-07-17 14:25:38,816:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:25:39,042:INFO: New best score recorded...
+2018-07-17 14:25:39,043:INFO: Epoch 4 out of 10
+2018-07-17 14:25:45,755:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:25:46,048:INFO: New best score recorded...
+2018-07-17 14:25:46,049:INFO: Epoch 5 out of 10
+2018-07-17 14:25:52,673:INFO: accuracy 90.48 - f1-score 0.00
+2018-07-17 14:25:52,921:INFO: New best score recorded...
+2018-07-17 14:25:52,921:INFO: Epoch 6 out of 10
+2018-07-17 14:25:59,580:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:25:59,907:INFO: New best score recorded...
+2018-07-17 14:25:59,908:INFO: Epoch 7 out of 10
+2018-07-17 14:26:06,662:INFO: accuracy 95.24 - f1-score 0.00
+2018-07-17 14:26:06,915:INFO: New best score recorded...
+2018-07-17 14:26:06,916:INFO: Epoch 8 out of 10
+2018-07-17 14:26:13,600:INFO: accuracy 100.00 - f1-score 100.00
+2018-07-17 14:26:13,833:INFO: New best score recorded...
+2018-07-17 14:26:13,833:INFO: Epoch 9 out of 10
+2018-07-17 14:26:20,477:INFO: accuracy 100.00 - f1-score 100.00
+2018-07-17 14:26:20,698:INFO: New best score recorded...
+2018-07-17 14:26:20,698:INFO: Epoch 10 out of 10
+2018-07-17 14:26:27,358:INFO: accuracy 100.00 - f1-score 100.00
+2018-07-17 14:26:27,648:INFO: New best score recorded...
+2018-07-17 14:29:46,577:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:29:48,357:INFO: Initialize tf session
+2018-07-17 14:29:49,080:INFO: Epoch 1 out of 10
+2018-07-17 14:29:56,647:INFO: accuracy 89.47 - f1-score 0.00
+2018-07-17 14:29:56,889:INFO: New best score recorded...
+2018-07-17 14:29:56,889:INFO: Epoch 2 out of 10
+2018-07-17 14:30:03,523:INFO: accuracy 89.10 - f1-score 0.00
+2018-07-17 14:30:03,755:INFO: New best score recorded...
+2018-07-17 14:30:03,756:INFO: Epoch 3 out of 10
+2018-07-17 14:30:10,360:INFO: accuracy 88.72 - f1-score 0.00
+2018-07-17 14:30:10,585:INFO: New best score recorded...
+2018-07-17 14:30:10,586:INFO: Epoch 4 out of 10
+2018-07-17 14:30:17,303:INFO: accuracy 89.10 - f1-score 8.33
+2018-07-17 14:30:17,627:INFO: New best score recorded...
+2018-07-17 14:30:17,628:INFO: Epoch 5 out of 10
+2018-07-17 14:30:24,260:INFO: accuracy 89.10 - f1-score 8.00
+2018-07-17 14:30:24,260:INFO: Epoch 6 out of 10
+2018-07-17 14:30:30,864:INFO: accuracy 87.22 - f1-score 7.41
+2018-07-17 14:30:30,864:INFO: Epoch 7 out of 10
+2018-07-17 14:30:37,503:INFO: accuracy 89.10 - f1-score 16.00
+2018-07-17 14:30:37,814:INFO: New best score recorded...
+2018-07-17 14:30:37,814:INFO: Epoch 8 out of 10
+2018-07-17 14:30:44,513:INFO: accuracy 88.72 - f1-score 13.79
+2018-07-17 14:30:44,514:INFO: Epoch 9 out of 10
+2018-07-17 14:30:51,096:INFO: accuracy 88.72 - f1-score 13.33
+2018-07-17 14:30:51,096:INFO: Epoch 10 out of 10
+2018-07-17 14:30:57,737:INFO: accuracy 89.10 - f1-score 14.29
+2018-07-17 14:30:57,737:INFO: Early stopping 3 epochs without improvement
+2018-07-17 14:41:45,781:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:41:47,581:INFO: Initialize tf session
+2018-07-17 14:41:48,283:INFO: Epoch 1 out of 10
+2018-07-17 14:41:55,850:INFO: accuracy 89.47 - f1-score 0.00
+2018-07-17 14:41:56,097:INFO: New best score recorded...
+2018-07-17 14:41:56,097:INFO: Epoch 2 out of 10
+2018-07-17 14:42:02,727:INFO: accuracy 89.47 - f1-score 0.00
+2018-07-17 14:42:03,145:INFO: New best score recorded...
+2018-07-17 14:42:03,146:INFO: Epoch 3 out of 10
+2018-07-17 14:42:09,770:INFO: accuracy 89.10 - f1-score 0.00
+2018-07-17 14:42:10,018:INFO: New best score recorded...
+2018-07-17 14:42:10,019:INFO: Epoch 4 out of 10
+2018-07-17 14:42:16,698:INFO: accuracy 89.47 - f1-score 8.33
+2018-07-17 14:42:17,010:INFO: New best score recorded...
+2018-07-17 14:42:17,010:INFO: Epoch 5 out of 10
+2018-07-17 14:42:23,648:INFO: accuracy 88.72 - f1-score 7.69
+2018-07-17 14:42:23,649:INFO: Epoch 6 out of 10
+2018-07-17 14:42:30,242:INFO: accuracy 88.72 - f1-score 7.69
+2018-07-17 14:42:30,242:INFO: Epoch 7 out of 10
+2018-07-17 14:42:36,850:INFO: accuracy 87.59 - f1-score 7.69
+2018-07-17 14:42:36,850:INFO: Early stopping 3 epochs without improvement
+2018-07-17 14:43:55,443:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 14:43:57,273:INFO: Initialize tf session
+2018-07-17 14:43:57,965:INFO: Epoch 1 out of 10
+2018-07-17 14:44:05,515:INFO: accuracy 89.47 - f1 0.00
+2018-07-17 14:44:05,794:INFO: New best score recorded...
+2018-07-17 14:44:05,794:INFO: Epoch 2 out of 10
+2018-07-17 14:44:12,412:INFO: accuracy 89.10 - f1 0.00
+2018-07-17 14:44:12,677:INFO: New best score recorded...
+2018-07-17 14:44:12,678:INFO: Epoch 3 out of 10
+2018-07-17 14:44:19,332:INFO: accuracy 88.35 - f1 0.00
+2018-07-17 14:44:19,655:INFO: New best score recorded...
+2018-07-17 14:44:19,655:INFO: Epoch 4 out of 10
+2018-07-17 14:44:26,361:INFO: accuracy 89.10 - f1 0.00
+2018-07-17 14:44:26,698:INFO: New best score recorded...
+2018-07-17 14:44:26,699:INFO: Epoch 5 out of 10
+2018-07-17 14:44:33,321:INFO: accuracy 88.35 - f1 9.09
+2018-07-17 14:44:33,572:INFO: New best score recorded...
+2018-07-17 14:44:33,573:INFO: Epoch 6 out of 10
+2018-07-17 14:44:40,198:INFO: accuracy 89.47 - f1 8.70
+2018-07-17 14:44:40,198:INFO: Epoch 7 out of 10
+2018-07-17 14:44:46,773:INFO: accuracy 87.97 - f1 8.33
+2018-07-17 14:44:46,773:INFO: Epoch 8 out of 10
+2018-07-17 14:44:53,439:INFO: accuracy 86.09 - f1 7.41
+2018-07-17 14:44:53,439:INFO: Early stopping 3 epochs without improvement
+2018-07-17 15:13:26,049:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-17 15:13:27,908:INFO: Initialize tf session
+2018-07-17 15:13:28,618:INFO: Epoch 1 out of 10
+2018-07-17 15:13:36,116:INFO: acc 89.47 - f1 0.00
+2018-07-17 15:13:36,508:INFO: New best score recorded...
+2018-07-17 15:13:36,508:INFO: Epoch 2 out of 10
+2018-07-17 15:13:43,146:INFO: acc 87.97 - f1 0.00
+2018-07-17 15:13:43,467:INFO: New best score recorded...
+2018-07-17 15:13:43,467:INFO: Epoch 3 out of 10
+2018-07-17 15:13:50,048:INFO: acc 87.59 - f1 0.00
+2018-07-17 15:13:50,347:INFO: New best score recorded...
+2018-07-17 15:13:50,348:INFO: Epoch 4 out of 10
+2018-07-19 14:46:15,062:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-19 14:46:19,087:INFO: Initialize tf session
+2018-07-19 14:46:24,722:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+2018-07-19 14:46:26,940:INFO: Initialize tf session

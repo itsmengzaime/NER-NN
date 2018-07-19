@@ -1,8 +1,8 @@
 #config
 import os 
 
-from utils import logging_file
-from data_utils import processing_trimmed_glove_vector,load_dict, get_processing_word
+from .utils import logging_file
+from .data_utils import processing_trimmed_glove_vector,load_dict, get_processing_word
 
 class Config():
     def __init__(self, load=True):
@@ -44,7 +44,7 @@ class Config():
     #dir location for parts 
     f_glove = "data/glove.6B/glove.6B.{}d.txt".format(dim_word)
     f_trimmed = "data/glove.6B/glove.6B.{}d.trimmed.npz".format(dim_word)
-    # for CoNLL2003
+   
     f_dev = "data/eng.testa.iob"
     f_test = "data/eng.testb.iob"
     f_train = "data/eng.train.iob"

@@ -21,7 +21,7 @@ class Progress(object):
         self.target = target
         self.verbose = verbose
         self.sum_value = {}
-        self.unique_value = {}
+        self.unique_value = []
         self.start = time.time()
         self.total_width = 0
         self.seen_so_far = 0
@@ -29,7 +29,7 @@ class Progress(object):
     def update(self, current, value=[], exact=[], strict=[]):
         for k,v in value:
             if k not in self.sum_value:
-                self.sum_value[k] =[v*(current - self.seen_so_far), current - self.seen_sofar]
+                self.sum_value[k] =[v*(current - self.seen_so_far), current - self.seen_so_far]
                 self.unique_value.append(k)
             else:
                 self.sum_value[k][0] += v*(current - self.seen_so_far)

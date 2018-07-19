@@ -64,8 +64,7 @@ class Model(object):
         self.add_summary()
         
         for epoch in range(self.config.num_epochs):
-            self.log.info("Epoch {:} out of {:}".format(epoch + 1,
-                        self.config.num_epochs))
+            self.log.info("Epoch {:} out of {:}".format(epoch + 1, self.config.num_epochs))
             score = self.run_epoch(train, dev, epoch)
             self.config.lr_rate *= self.config.lr_decay
             

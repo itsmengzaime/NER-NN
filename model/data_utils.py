@@ -3,7 +3,7 @@ import os
 
 UNK = "$UNK$"
 NUM = "$NUM$"
-NONE = "0"
+NONE = "O"
 
 class MIOError(Exception):
     def __init__(self, filename):
@@ -192,7 +192,7 @@ def minibatches(data, size):
 def get_chunk_type(token,tag):
     tag_name = tag[token]
     tag_class = tag_name.split('-')[0]
-    tag_type = tag_name.split('-')[1]
+    tag_type = tag_name.split('-')[-1]
     return tag_class, tag_type
 
 def get_chunks(seq, tags):

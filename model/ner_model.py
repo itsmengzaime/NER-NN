@@ -2,9 +2,9 @@ import tensorflow as tf
 import os
 import numpy as np
 
-from model import Model
-from utils import Progress
-from data_utils import minibatches, pad_sequences, get_chunks
+from .model import Model
+from .utils import Progress
+from .data_utils import minibatches, pad_sequences, get_chunks
 
 class NERModel(Model):
     def __init__(self, config):
@@ -12,7 +12,7 @@ class NERModel(Model):
         self.tag_idx = {idx: tag for tag, idx in self.config.vocab_tags.items()}
         
     def initialize_placeholder_tensor(self):
-        self.c_id = tf.placeholder(tf.int32, shape=[None, None, None], name="char_id") # [batch_size, max_length_sentence, max_length_word]				
+        self.c_id = tf.placeholder(tf.int32, shape=[None, None, None], name="char_id") # [batch_size, max_length_sentence, max_length_word]
         self.w_id = tf.placeholder(tf.int32, shape=[None, None], name="word_id") #[batch_size, max_length_of_sentence_in_batch]
         self.w_len = tf.placeholder(tf.int32, shape=[None, None], name="word_len")  # [batch_size, max_length_sentence]
         self.seq_len = tf.placeholder(tf.int32, shape=[None], name="sequence_length") #[batch_size]
@@ -24,7 +24,7 @@ class NERModel(Model):
         if self.config.use_chars:
             c_id, w_id = zip(*word)
             w_id, seq_len = pad_sequences(w_id, 0)
-            c_id, w_len = pad_sequences(c_id, pad_tok=0, nlevel=2)
+            c_id, w_len = pad_sequences(c_id, pad_tok=0, nlevels=2)
         else: 
             w_id , seq_len = pad_sequences(word, 0)
         
@@ -136,6 +136,11 @@ class NERModel(Model):
                 viterbi_seq += [vi_seq]
             
             return viterbi_seq, seq_len
+        else:
+            label_pred = self.sess.run(self.label_pred, feed_dict=fd)
+            
+            return label_pred, seq_len
+            
         
     def run_epoch(self, train, dev, epoch):
         batch_size = self.config.batch_size
@@ -150,7 +155,7 @@ class NERModel(Model):
             if (i%10 == 0):
                 self.file_writer.add_summary(summary, epoch*num_batch+i)
                 
-        metric = self.evaluate(dev)
+        metrics = self.evaluate(dev)
         msg = " - ".join(["{} {:04.2f}".format(k, v) for k, v in metrics.items()])
         self.log.info(msg)
 
@@ -158,29 +163,27 @@ class NERModel(Model):
     
     def evaluate(self, test):
         accuracy = []
-        correct_prediction = 0.
-        total_correct = 0.
-        total_prediction = 0.
+        correct_prediction, total_correct, total_prediction = 0.,0.,0.
+       
         for word, label in minibatches(test, self.config.batch_size):
             label_predict, seq_len = self.predict_batch(word)
 
-        for lb, lb_pred, length in zip(label, label_predict, seq_len):
-            lb = lb[:length]
-            lb_pred = lb_pred[:length]
-            accuracy += [a==b for (a,b) in zip(lb, lb_pred)]
-            lb_chunks = set(get_chunks(lb, self.config.vocab_tag))
-            lb_pred_chunks = set(get_chunks(lb_pred, self.config.vocab_tag))
-            correct_prediction += len(lb_chunks & lb_pred_chunks)
-            total_prediction += len(lb_pred_chunks)
-            total_correct += len(lb_chunks)
-            
+            for lb, lb_pred, length in zip(label, label_predict, seq_len):
+                lb = lb[:length]
+                lb_pred = lb_pred[:length]
+                accuracy += [a==b for (a,b) in zip(lb, lb_pred)]
+                lb_chunks = set(get_chunks(lb, self.config.vocab_tags))
+                lb_pred_chunks = set(get_chunks(lb_pred, self.config.vocab_tags))
+                correct_prediction += len(lb_chunks & lb_pred_chunks)
+                total_prediction += len(lb_pred_chunks)
+                total_correct += len(lb_chunks)
         
         precision = correct_prediction / total_prediction if correct_prediction >0 else 0
         recall = correct_prediction / total_correct if correct_prediction >0 else 0
         f1 = 2*precision*recall / (precision+recall) if correct_prediction >0 else 0
         acc = np.mean(accuracy)
         
-        return {"accuracy": 100*acc, "f1-score": 100*f1}
+        return {"acc": 100*acc, "f1": 100*f1}
     
     def predict(self, raw_word):
         
