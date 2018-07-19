@@ -55,8 +55,8 @@ class Config():
     
     #training
     train_embbedings = False
-    num_epochs = 10
-    drop_out = 0.1
+    num_epochs = 20
+    drop_out = 0.5
     batch_size = 20
     method = "adam"
     lr_rate = 0.001

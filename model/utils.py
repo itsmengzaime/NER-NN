@@ -81,7 +81,7 @@ class Progress(object):
                 info += ' -%ds' %(now - self.start)
 
             for k in self.unique_value:
-                if type(self.sum_value[k][0]) is list:
+                if type(self.sum_value[k]) is list:
                     info += ' -%s: %.4f ' %(k, self.sum_value[k][0] / max(1, self.sum_value[k][1]))
                 else:
                     info += ' -%s: %s ' %(k, self.sum_value[k])
