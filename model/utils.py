@@ -34,12 +34,16 @@ class Progress(object):
             else:
                 self.sum_value[k][0] += v*(current - self.seen_so_far)
                 self.sum_value[k][1] += (current - self.seen_so_far)
-        
         for k, v in exact:
             if k not in self.sum_value:
                 self.unique_value.append(k)
-            self.sum_value[k] = v
+            self.sum_value[k] = [v,1]
         
+        for k, v in strict:
+            if k not in self.sum_value:
+                self.unique_value.append(k)
+            self.sum_value[k] = v
+                
         self.seen_so_far = current
         
         now = time.time()
