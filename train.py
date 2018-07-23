@@ -14,3 +14,4 @@ train = PreProcessData(config.f_train, config.processing_word,config.processing_
 dev = PreProcessData(config.f_dev, config.processing_word, config.processing_tag, config.max_iter)
 
 model.train(train, dev)
+
