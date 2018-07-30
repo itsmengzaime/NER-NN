@@ -57,7 +57,8 @@ class Config():
     lr_decay = 0.9
     clip = -1
     num_epoch_no_imprv = 10
-
+    fil_size = [2,3,4,5]
+    num_filter = 128
     # model hyperparameters
     hidden_size_char = 100 # lstm on chars
     hidden_size_lstm = 300 # lstm on word embeddings
