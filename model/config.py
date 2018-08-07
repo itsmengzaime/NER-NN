@@ -39,9 +39,9 @@ class Config():
     use_pretrained = True
 
     # dataset
-    f_dev = "data/pub.dev"
-    f_test = "data/pub.test"
-    f_train = "data/pub.train"
+    f_dev = "data/eng.testb.iob"#"data/pub.dev"
+    f_test = "data/eng.testa.iob"#"data/pub.test"
+    f_train = "data/eng.train.iob" #"data/pub.train"
 
     max_iter = None # if not None, max number of examples in Dataset
     f_words = "data/words.txt"
@@ -51,14 +51,14 @@ class Config():
     train_embeddings = False
     num_epochs = 100
     drop_out = 0.3
-    batch_size = 20
+    batch_size = 25
     method = "adam"
     lr_rate = 0.01
     lr_decay = 0.9
     clip = -1
     num_epoch_no_imprv = 10
     fil_size = [2,3,4,5]
-    num_filter = 128
+    num_filter = 100
     # model hyperparameters
     hidden_size_char = 100 # lstm on chars
     hidden_size_lstm = 300 # lstm on word embeddings
@@ -66,4 +66,4 @@ class Config():
     # NOTE: if both chars and crf, only 1.6x slower on GPU
     use_crf = True # if crf, training is 1.7x slower on CPU
     use_chars = True # if char embedding, training is 3.5x slower on CPU
-
+    use_cnn = False
