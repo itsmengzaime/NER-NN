@@ -1,5 +1,0 @@
-2018-08-08 03:08:14,741:WARNING: From /home/huydq/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
-Instructions for updating:
-Use the retry module or similar alternatives.
-2018-08-08 03:08:19,483:INFO: Initializing tf session
-2018-08-08 03:08:29,817:INFO: Epoch 1 out of 100
