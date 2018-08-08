@@ -1,9 +1,9 @@
 import numpy as np
 import os
 import tensorflow as tf
-from utils import Progress
-from model import Model
-from data_utils import minibatches, pad_sequences, get_chunks
+from .utils import Progress
+from .model import Model
+from .data_utils import minibatches, pad_sequences, get_chunks
 
 class NERModel(Model):
     def __init__(self, config):
@@ -61,93 +61,60 @@ class NERModel(Model):
                 _word_embeddings = tf.Variable(self.config.embeddings,name="_word_embeddings",dtype=tf.float32, trainable=self.config.train_embeddings)    
            
             word_embeddings = tf.nn.embedding_lookup(_word_embeddings,self.w_id, name="word_embeddings")
-  
-        # CNN for chars
-#         with tf.variable_scope("chars"):
-#             if self.config.use_chars:
-#                 _char_embeddings = tf.get_variable(name="_char_embeddings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])
-#                 char_embeddings = tf.nn.embedding_lookup(_char_embeddings, self.c_id, name="char_embeddings")
-#                 s = tf.shape(char_embeddings)
-#                 char_embeddings = tf.reshape(char_embeddings, shape=[s[0]*s[1], s[-2], self.config.dim_char])
-#                 embedded_char_expand = tf.expand_dims(char_embeddings, -1)
-#                 print(char_embeddings, embedded_char_expand)
-#                 pooled_output =[]            
-#                 for i , fs in enumerate(self.config.fil_size):
-#                     with tf.name_scope("cnn-chars-%s"%fs):
-#                         temp = embedded_char_expand.get_shape()[1] - fs +1
-#                         print temp
-#                         fil_shape = [fs, self.config.dim_char, 1, self.config.num_filter]
-#                         W = tf.Variable(tf.truncated_normal(fil_shape, stddev=0.1), name="W_char")
-#                         b = tf.Variable(tf.constant(0.1, shape=[self.config.num_filter]),name="b_char")
-#                         conv = tf.nn.conv2d(embedded_char_expand, W, strides=[1,1,1,1], padding='VALID', name='conv')
-#                         h = tf.nn.relu(tf.nn.bias_add(conv, b), name='relu')
-#                         pooled = tf.nn.max_pool(h, ksize=[1,self.config.num_char-fs+1,1,1],strides=[1,1,1,1], padding="VALID", name="pool")
-# #                         print(fil_shape, W, b, conv, h, pooled)
-# #                         print("\n")
-#                         pooled_output.append(pooled)
-                    
-#                 total_fil = self.config.num_filter * len(self.config.fil_size)
-#                 h_pool = tf.concat(pooled_output, 3)
-#                 h_pool_flat = tf.reshape(h_pool, shape=[-1, s[1],total_fil])
-#                 word_embeddings = tf.concat([word_embeddings, h_pool_flat], axis=-1)
-#         self.word_embeddings = tf.nn.dropout(word_embeddings, self.drop_out)
         
          # CNN for chars test 
-#         with tf.variable_scope("chars"):
-#             if self.config.use_chars:
-#                 _char_embeddings = tf.get_variable(name="_char_embeddings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])
-#                 # shape = (batch, sentence, word, dim of char embeddings)
-#                 char_embeddings = tf.nn.embedding_lookup(_char_embeddings, self.c_id, name="char_embeddings")
-#                 s = tf.shape(char_embeddings)
-#                 print _char_embeddings.get_shape(), char_embeddings.get_shape(), s, s.get_shape()
-#                 #shape = [batch_size*seq_len, len_word, emb_dim]
-#                 char_embeddings= tf.reshape(char_embeddings, shape=[s[0]*s[1], s[-2], self.config.dim_char])
-#                 #expand 1 dimesion similar to image shape = [batch_size*seq_len, len_word, emb_dim, 1]
-#                 embedded_char_expand = tf.expand_dims(char_embeddings, -1)
-#                 print char_embeddings.get_shape(), embedded_char_expand.get_shape()
-#                 pooled_output =[]            
-#                 if self.config.use_cnn:
-#                     for i,fs in enumerate(self.config.fil_size):
-#                         with tf.name_scope("cnn-chars-%s"%fs):
-#                             #shape = [kernel_size, emb_dim, 1 , filter_size]
-#                             fil_shape = [fs, self.config.dim_char, int(embedded_char_expand.get_shape()[-1]), self.config.num_filter]
-#                             W = tf.Variable(tf.truncated_normal(fil_shape, stddev=0.1), name="W_char")
-#                             b = tf.Variable(tf.constant(0.1, shape=[self.config.num_filter]),name="b_char")
-#                             conv = tf.nn.conv2d(embedded_char_expand, W, strides=[1,1,1,1], padding='VALID', name='conv')
-#     #                         h = tf.nn.relu(tf.nn.bias_add(conv, b), name='relu')
-#                             pooled = tf.nn.max_pool(conv, ksize=[1,self.config.num_char-fs +1 ,1,1],strides=[1,1,1,1], padding="VALID", name="pool")
-#                             pooled_output.append(pooled)
-
-#                     total_fil = self.config.num_filter * len(self.config.fil_size)
-#                     h_pool = tf.concat(pooled_output, 3)
-#                     h_pool_flat = tf.reshape(h_pool, shape=[-1, s[1],total_fil])
-#                     word_embeddings = tf.concat([word_embeddings, h_pool_flat], axis=-1)
-#         self.word_embeddings = tf.nn.dropout(word_embeddings, self.drop_out)
+        with tf.variable_scope("chars"):
+            if self.config.use_chars:
+                _char_embeddings = tf.get_variable(name="_char_embeddings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])
+                # shape = (batch, sentence, word, dim of char embeddings)
+                char_embeddings = tf.nn.embedding_lookup(_char_embeddings, self.c_id, name="char_embeddings")
+                s = tf.shape(char_embeddings)
+                #shape = [batch_size*seq_len, len_word, emb_dim]
+                char_embeddings= tf.reshape(char_embeddings, shape=[s[0]*s[1], self.config.num_char, self.config.dim_char])
+                #expand 1 dimesion similar to image shape = [batch_size*seq_len, len_word, emb_dim, 1]
+                embedded_char_expand = tf.expand_dims(char_embeddings, -1)
+                pooled_output =[]            
+                if self.config.use_cnn:
+                    for i,kernel in enumerate(self.config.kernel_size):
+                        with tf.name_scope("cnn-chars-%s"%kernel):
+                            #shape = [kernel_size, emb_dim, 1 , filter_size]
+                            fil_shape = [kernel, self.config.dim_char, 1 , self.config.num_filter]
+                            W = tf.Variable(tf.truncated_normal(fil_shape, stddev=0.1), name="W_char")
+                            b = tf.Variable(tf.constant(0.1, shape=[self.config.num_filter]),name="b_char")
+                            conv = tf.nn.conv2d(embedded_char_expand, W, strides=[1,1,1,1], padding='VALID', name='conv')
+                            h = tf.nn.relu(tf.nn.bias_add(conv, b), name='relu')
+                            pooled = tf.nn.max_pool(conv, ksize=[1,self.config.num_char-kernel +1 ,1,1],strides=[1,1,1,1], padding="VALID", name="pool")
+                            pooled_output.append(pooled)
+                    total_fil = self.config.num_filter * len(self.config.kernel_size)
+                    h_pool = tf.concat(pooled_output, 3)
+                    h_pool_flat = tf.reshape(h_pool, shape=[-1, s[1],total_fil])
+                    word_embeddings = tf.concat([word_embeddings, h_pool_flat], axis=-1)
+        self.word_embeddings = tf.nn.dropout(word_embeddings, self.drop_out)
         
 
         #bi-lstm for chars
-        with tf.variable_scope("chars"):
-            if self.config.use_chars:
-                _char_embeddings = tf.get_variable(name="_char_embeddings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])        
-                char_embeddings = tf.nn.embedding_lookup(_char_embeddings, self.c_id, name="char_embeddings")
-                s = tf.shape(char_embeddings)
-                print _char_embeddings.get_shape(), char_embeddings.get_shape(), s, s.get_shape()
-                char_embeddings = tf.reshape(char_embeddings,shape=[s[0]*s[1], s[-2], self.config.dim_char])
-                w_len = tf.reshape(self.w_len, shape=[s[0]*s[1]])
-                print char_embeddings.get_shape()
-                # bi-lstm chars
-                cell_fw = tf.contrib.rnn.LSTMCell(self.config.hidden_size_char, state_is_tuple=True)
-                cell_bw = tf.contrib.rnn.LSTMCell(self.config.hidden_size_char, state_is_tuple=True)
-                _output = tf.nn.bidirectional_dynamic_rnn( cell_fw, cell_bw, char_embeddings, sequence_length=w_len, dtype=tf.float32)
-                # read and concat output
-                _, ((_, output_fw), (_, output_bw)) = _output
-                output = tf.concat([output_fw, output_bw], axis=-1)
-                print output.get_shape()
-                output = tf.reshape(output, shape=[s[0], s[1], 2*self.config.hidden_size_char])
-                print output.get_shape()
-                word_embeddings = tf.concat([word_embeddings, output], axis=-1)
-                print word_embeddings.get_shape()
-        self.word_embeddings =  tf.nn.dropout(word_embeddings, self.drop_out)
+#         with tf.variable_scope("chars"):
+#             if self.config.use_chars:
+#                 _char_embeddings = tf.get_variable(name="_char_embeddings", dtype=tf.float32, shape=[self.config.num_char, self.config.dim_char])        
+#                 char_embeddings = tf.nn.embedding_lookup(_char_embeddings, self.c_id, name="char_embeddings")
+#                 s = tf.shape(char_embeddings)
+#                 print (_char_embeddings.get_shape(), char_embeddings.get_shape(), s, s.get_shape())
+#                 char_embeddings = tf.reshape(char_embeddings,shape=[s[0]*s[1], s[-2], self.config.dim_char])
+#                 w_len = tf.reshape(self.w_len, shape=[s[0]*s[1]])
+#                 print (char_embeddings.get_shape())
+#                 # bi-lstm chars
+#                 cell_fw = tf.contrib.rnn.LSTMCell(self.config.hidden_size_char, state_is_tuple=True)
+#                 cell_bw = tf.contrib.rnn.LSTMCell(self.config.hidden_size_char, state_is_tuple=True)
+#                 _output = tf.nn.bidirectional_dynamic_rnn( cell_fw, cell_bw, char_embeddings, sequence_length=w_len, dtype=tf.float32)
+#                 # read and concat output
+#                 _, ((_, output_fw), (_, output_bw)) = _output
+#                 output = tf.concat([output_fw, output_bw], axis=-1)
+#                 print (output.get_shape())
+#                 output = tf.reshape(output, shape=[s[0], s[1], 2*self.config.hidden_size_char])
+#                 print (output.get_shape())
+#                 word_embeddings = tf.concat([word_embeddings, output], axis=-1)
+#                 print (word_embeddings.get_shape())
+#         self.word_embeddings =  tf.nn.dropout(word_embeddings, self.drop_out)
                                               
     def logits_option(self):
         with tf.variable_scope("bi-lstm"):
@@ -156,12 +123,13 @@ class NERModel(Model):
             (output_fw, output_bw), _ = tf.nn.bidirectional_dynamic_rnn( cell_fw, cell_bw, self.word_embeddings, sequence_length=self.seq_len, dtype=tf.float32)
             output = tf.concat([output_fw, output_bw], axis=-1)
             output = tf.nn.dropout(output, self.drop_out)
-
+            print(output.get_shape())
         with tf.variable_scope("projection"):
             W = tf.get_variable("W", dtype=tf.float32, shape=[2*self.config.hidden_size_lstm, self.config.num_tag])
             b = tf.get_variable("b", shape=[self.config.num_tag], dtype=tf.float32, initializer=tf.zeros_initializer())
             num_step = tf.shape(output)[1]
             output = tf.reshape(output, [-1, 2*self.config.hidden_size_lstm])
+            print (output.get_shape())
             pred = tf.matmul(output, W) + b
             self.logit = tf.reshape(pred, [-1, num_step, self.config.num_tag])
 

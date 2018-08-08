@@ -57,7 +57,7 @@ class Config():
     lr_decay = 0.9
     clip = -1
     num_epoch_no_imprv = 10
-    fil_size = [2,3,4,5]
+    kernel_size = [2,3,4,5]
     num_filter = 100
     # model hyperparameters
     hidden_size_char = 100 # lstm on chars
@@ -66,4 +66,4 @@ class Config():
     # NOTE: if both chars and crf, only 1.6x slower on GPU
     use_crf = True # if crf, training is 1.7x slower on CPU
     use_chars = True # if char embedding, training is 3.5x slower on CPU
-    use_cnn = False
+    use_cnn = True
