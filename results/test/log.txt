@@ -1,0 +1,13 @@
+2018-08-14 15:36:28,027:INFO: Initializing tf session
+2018-08-14 15:36:30,753:INFO: Epoch 1 out of 100
+2018-08-14 15:36:49,821:INFO: Initializing tf session
+2018-08-14 15:36:52,315:INFO: Epoch 1 out of 100
+2018-08-14 15:38:03,328:INFO: acc 93.45 - f1 65.93 - precision 0.66 - recall 0.66
+2018-08-14 15:38:03,733:INFO: -- new best score recorded!
+2018-08-14 15:38:03,733:INFO: Epoch 2 out of 100
+2018-08-14 15:39:08,787:INFO: acc 94.87 - f1 73.57 - precision 0.75 - recall 0.73
+2018-08-14 15:39:09,241:INFO: -- new best score recorded!
+2018-08-14 15:39:09,241:INFO: Epoch 3 out of 100
+2018-08-14 15:40:14,043:INFO: acc 95.62 - f1 77.42 - precision 0.78 - recall 0.77
+2018-08-14 15:40:14,550:INFO: -- new best score recorded!
+2018-08-14 15:40:14,550:INFO: Epoch 4 out of 100

@@ -10,40 +10,42 @@ def logging_file(filename):
     logging.basicConfig(format='%(message)s', level=logging.DEBUG)
     handler = logging.FileHandler(filename)
     handler.setLevel(logging.DEBUG)
-    handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s: %(message)s'))
+    handler.setFormatter(logging.Formatter(
+            '%(asctime)s:%(levelname)s: %(message)s'))
     logging.getLogger().addHandler(handler)
     return logger
 
 
-class Progress(object):
+class ProgressBar(object):
+
     def __init__(self, target, width=30, verbose=1):
         self.width = width
         self.target = target
-        self.verbose = verbose
-        self.sum_value = {}
-        self.unique_value = []
+        self.sum_values = {}
+        self.unique_values = []
         self.start = time.time()
         self.total_width = 0
         self.seen_so_far = 0
-        
+        self.verbose = verbose
 
-    def update(self, current, value=[], exact=[], strict=[]):
-        for k, v in value:
-            if k not in self.sum_value:
-                self.sum_value[k] = [v * (current - self.seen_so_far),current - self.seen_so_far]
-                self.unique_value.append(k)
+    def update(self, current, values=[], exact=[], strict=[]):
+        for k, v in values:
+            if k not in self.sum_values:
+                self.sum_values[k] = [v * (current - self.seen_so_far),
+                                      current - self.seen_so_far]
+                self.unique_values.append(k)
             else:
-                self.sum_value[k][0] += v * (current - self.seen_so_far)
-                self.sum_value[k][1] += (current - self.seen_so_far)
+                self.sum_values[k][0] += v * (current - self.seen_so_far)
+                self.sum_values[k][1] += (current - self.seen_so_far)
         for k, v in exact:
-            if k not in self.sum_value:
-                self.unique_value.append(k)
-            self.sum_value[k] = [v, 1]
+            if k not in self.sum_values:
+                self.unique_values.append(k)
+            self.sum_values[k] = [v, 1]
 
         for k, v in strict:
-            if k not in self.sum_value:
-                self.unique_value.append(k)
-            self.sum_value[k] = v
+            if k not in self.sum_values:
+                self.unique_values.append(k)
+            self.sum_values[k] = v
 
         self.seen_so_far = current
 
@@ -52,8 +54,9 @@ class Progress(object):
             prev_total_width = self.total_width
             sys.stdout.write("\b" * prev_total_width)
             sys.stdout.write("\r")
-            num_digit = int(np.floor(np.log10(self.target))) + 1
-            barstr = '%%%dd/%%%dd [' % (num_digit, num_digit)
+
+            numdigits = int(np.floor(np.log10(self.target))) + 1
+            barstr = '%%%dd/%%%dd [' % (numdigits, numdigits)
             bar = barstr % (current, self.target)
             prog = float(current)/self.target
             prog_width = int(self.width*prog)
@@ -78,10 +81,10 @@ class Progress(object):
                 info += ' - ETA: %ds' % eta
             else:
                 info += ' - %ds' % (now - self.start)
-            for k in self.unique_value:
-                if type(self.sum_value[k]) is list:
+            for k in self.unique_values:
+                if type(self.sum_values[k]) is list:
                     info += ' - %s: %.4f' % (k,
-                        self.sum_value[k][0] / max(1, self.sum_value[k][1]))
+                        self.sum_values[k][0] / max(1, self.sum_values[k][1]))
                 else:
                     info += ' - %s: %s' % (k, self.sum_values[k])
 
@@ -98,13 +101,12 @@ class Progress(object):
         if self.verbose == 2:
             if current >= self.target:
                 info = '%ds' % (now - self.start)
-                for k in self.unique_value:
+                for k in self.unique_values:
                     info += ' - %s: %.4f' % (k,
-                        self.sum_value[k][0] / max(1, self.sum_value[k][1]))
+                        self.sum_values[k][0] / max(1, self.sum_values[k][1]))
                 sys.stdout.write(info + "\n")
 
-    def add(self, n, value=[]):
-        self.update(self.seen_so_far+n, value)
-
+    def add(self, n, values=[]):
+        self.update(self.seen_so_far+n, values)
 
 

@@ -5,7 +5,7 @@ class Model(object):
     def __init__(self, config):
         self.config = config
         self.log = config.log
-        self.session   = None
+        self.session  = None
         self.save  = None
 
     def initialize_weights(self, scope):

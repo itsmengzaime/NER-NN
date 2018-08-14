@@ -1,26 +1,41 @@
-from __future__ import absolute_import
+import os
+import subprocess
 from model.config import Config
 from model.data_utils import *
 
 
-config = Config(load=False)
-processing_word = get_processing_word(lowercase=True)
+def main():
+    # get config and processing of words
+    config = Config(load=False)
+    processing_word = get_processing_word(lowercase=False)
 
-dev = PreProcessData(config.f_dev, processing_word)
-test = PreProcessData(config.f_test, processing_word)
-train = PreProcessData(config.f_train, processing_word)
+    # Generators
+    dev   = PreProcessData(config.f_dev, processing_word)
+    test  = PreProcessData(config.f_test, processing_word)
+    train = PreProcessData(config.f_train, processing_word)
 
-vocab_words, vocab_tags = processing_vocab([train, dev, test])
-vocab_glove = glove_vocab(config.f_glove)
+    # Build Word and Tag vocab
+    vocab_words, vocab_tags = get_vocabs([train, dev, test])
 
-vocab = vocab_words & vocab_glove
-vocab.add(UNK) 
-vocab.add(NUM)
+    vocab_glove = get_word_vec_vocab(config.f_glove)
+    vocab = vocab_words & vocab_glove
+    vocab.add(NUM)
+    vocab.add(UNK)
 
-writing_vocab(vocab, config.f_words)
-writing_vocab(vocab_tags, config.f_tags)
-vocab1 = load_dict(config.f_words)
-exp_trimmed_glove_vector(vocab1, config.f_glove, config.f_trimmed,config.dim_word)
-train_data = PreProcessData(config.f_train)
-vocab_chars = processing_char_vocab(train_data)
-writing_vocab(vocab_chars, config.f_chars)
+    # Save vocab
+    write_vocab(vocab, config.f_words)
+    write_vocab(vocab_tags, config.f_tags)
+
+    # Trim GloVe Vectors
+    if "glove" in config.use_pretrained:
+        vocab = load_vocab(config.f_words)
+        export_trimmed_word_vectors(vocab, config.f_glove,config.f_trimmed, config.dim_word)
+
+    # Build and save char vocab
+    train = PreProcessData(config.f_train)
+    vocab_chars = get_char_vocab(train)
+    write_vocab(vocab_chars, config.f_chars)
+
+
+if __name__ == "__main__":
+    main()
