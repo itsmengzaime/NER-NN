@@ -20,9 +20,9 @@ class Config():
 
     def load(self):
         # 1. vocabulary
-        self.vocab_words = load_vocab(self.f_words)
-        self.vocab_tags  = load_vocab(self.f_tags)
-        self.vocab_chars = load_vocab(self.f_chars)
+        self.vocab_words = load_dict(self.f_words)
+        self.vocab_tags  = load_dict(self.f_tags)
+        self.vocab_chars = load_dict(self.f_chars)
 
         self.num_word     = len(self.vocab_words)
         self.num_char     = len(self.vocab_chars)
@@ -56,9 +56,9 @@ class Config():
     f_trimmed = "data/glove.6B.{}d.trimmed.npz".format(dim_word)
 
     # dataset 
-    f_dev = "data/valid.txt"#"data/eng.testb.iob"
-    f_test = "data/test.txt"#"data/eng.testa.iob"
-    f_train = "data/train.txt"#"data/eng.train.iob"
+    f_dev = "data/pub.dev"#"data/valid.txt"#"data/eng.testb.iob"
+    f_test = "data/pub.test"#"data/test.txt"#"data/eng.testa.iob"
+    f_train = "data/pub.train"#"data/train.txt"#"data/eng.train.iob"
 
     max_iter = None # if not None, max number of examples in Dataset
 
@@ -70,19 +70,23 @@ class Config():
     # training
     train_embeddings = False
     num_epochs       = 100
-    drop_out          = 0.5
-    batch_size       = 20
-    method        = "adam"
-    lr_rate               = 0.005
-    lr_decay         = 1.0
+    drop_out         = 0.62
+    batch_size       = 32
+    method           = "adam"
+    lr_rate          = 0.0105
+    lr_decay         = 0.9
     clip             = -1 
     num_epoch_no_imprv  = 10
-
+    #test cnn2d
+    filters = 32
+    kernel_size = [2,3,4,5]
+    
     # model hyperparameters
-    hidden_size_char = 10 # lstm on chars
+    hidden_size_char = 100 # lstm on chars
     hidden_size_lstm = 300 # lstm on word embeddings
 
     # NOTE: if both chars and crf, only 1.6x slower on GPU
     use_crf = True # if crf, training is 1.7x slower on CPU
     use_chars = "cnn" # blstm, cnn or None
-    max_len_of_word = 20  # used only when use_chars = 'cnn'
+    max_len_of_word = 30  # used only when use_chars = 'cnn'
+    

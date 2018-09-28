@@ -15,7 +15,7 @@ def main():
     train = PreProcessData(config.f_train, processing_word)
 
     # Build Word and Tag vocab
-    vocab_words, vocab_tags = get_vocabs([train, dev, test])
+    vocab_words, vocab_tags = processing_vocab([train, dev, test])
 
     vocab_glove = get_word_vec_vocab(config.f_glove)
     vocab = vocab_words & vocab_glove
@@ -28,12 +28,12 @@ def main():
 
     # Trim GloVe Vectors
     if "glove" in config.use_pretrained:
-        vocab = load_vocab(config.f_words)
+        vocab = load_dict(config.f_words)
         export_trimmed_word_vectors(vocab, config.f_glove,config.f_trimmed, config.dim_word)
 
     # Build and save char vocab
     train = PreProcessData(config.f_train)
-    vocab_chars = get_char_vocab(train)
+    vocab_chars = processing_char_vocab(train)
     write_vocab(vocab_chars, config.f_chars)
 
 

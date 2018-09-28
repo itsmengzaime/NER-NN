@@ -1,6 +1,8 @@
 import os
 import tensorflow as tf
 
+
+
 class Model(object):
     def __init__(self, config):
         self.config = config
@@ -37,7 +39,10 @@ class Model(object):
 
     def initialize_session(self):
         self.log.info("Initializing tf session")
-        self.session = tf.Session()
+#         temp_config = tf.ConfiProto(log_device_placement=True)
+#         temp_config.gpu_options.allow_growth = False
+#         temp_config.gpu_options.per_process_gpu_memory_fraction = 0.4
+        self.session = tf.Session()#config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=True))
         self.session.run(tf.global_variables_initializer())
         self.save = tf.train.Saver()
 
@@ -60,8 +65,7 @@ class Model(object):
     def train(self, train, dev):    
         score_record = 0
         num_epoch_no_imprv = 0
-        self.add_summary()
-        
+        self.add_summary()        
         for epoch in range(self.config.num_epochs):
             self.log.info("Epoch {:} out of {:}".format(epoch + 1,self.config.num_epochs))
             score = self.run_epoch(train, dev, epoch)

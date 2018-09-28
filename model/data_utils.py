@@ -3,13 +3,10 @@ import re
 from string import punctuation
 
 
-# shared global variables to be imported from model also
 UNK = "*UNKNOWN*"
 NUM = "0"
 NONE = "O"
 
-
-# special error message
 class MyIOError(Exception):
     def __init__(self, filename):
         message = "ERROR: Unable to locate file {}".format(filename)
@@ -56,29 +53,28 @@ class PreProcessData(object):
         return self.length
 
 
-def get_vocabs(datasets):
+def processing_vocab(data):
     print("Building vocab...")
     vocab_words = set()
     vocab_tags = set()
-    for dataset in datasets:
-        for words, tags in dataset:
+    for dt in data:
+        for words, tags in dt:
             vocab_words.update(words)
             vocab_tags.update(tags)
-    print("- done. {} tokens".format(len(vocab_words)))
+    print("Done. {} tokens".format(len(vocab_words)))
     return vocab_words, vocab_tags
 
 
-def get_char_vocab(dataset):
+def processing_char_vocab(data):
     vocab_char = set()
-    for words, _ in dataset:
+    for words, _ in data:
         for word in words:
             vocab_char.update(word)
-
     return vocab_char
 
 
 def get_word_vec_vocab(filename):
-    print("Building vocab...")
+    print("Building vocabulary from pre-trained model ...")
     vocab = set()
     with open(filename) as f:
         for line in f:
@@ -89,7 +85,7 @@ def get_word_vec_vocab(filename):
 
 
 def write_vocab(vocab, filename):
-    print("Writing vocab...")
+    print("Writing vocabulary to output file...")
     with open(filename, "w") as f:
         for i, word in enumerate(vocab):
             if i != len(vocab) - 1:
@@ -99,7 +95,7 @@ def write_vocab(vocab, filename):
     print("- done. {} tokens".format(len(vocab)))
 
 
-def load_vocab(filename):
+def load_dict(filename):
     try:
         d = dict()
         with open(filename) as f:
@@ -136,13 +132,12 @@ def export_trimmed_word_vectors(vocab, vec_filename, trimmed_filename, dim, part
                 word_idx = vocab[word]
                 embeddings[word_idx] = np.asarray(embedding)
 
-    print("Found {} words in the pre-trained embedding file. {} number of them in dataset vocabulary."
+    print("Found {} words in the pre-trained embedding file. {} number of them in data vocabulary."
           .format(numb_of_words, numb_of_words_in_vocab))
     np.savez_compressed(trimmed_filename, embeddings=embeddings)
 
 
 def get_trimmed_word_vectors(filename):
-
     try:
         with np.load(filename) as data:
             return data["embeddings"]
