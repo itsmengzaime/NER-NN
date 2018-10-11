@@ -8,6 +8,7 @@ Named Entity Recognition for plant gene dataset using Bi-LSTM + CNN + CRF
 
 ### Model: 
 Main model consists two main stage: 
+ * CNN model: a CNN network with different kernel size work at characater level to extract information from words. 
  * bi-lSTM model: includings independent LSTM model with same size but in opposite direction.
  * CRF layer: output from bi-LSTM will be used as input for CRF to compute the tag score and also predict the word is entity or not.
 
